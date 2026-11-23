@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<LangVersion>preview</LangVersion>
+		<BaseOutputPath>../build/bin/</BaseOutputPath>
+		<BaseIntermediateOutputPath>../build/obj/</BaseIntermediateOutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<RootNamespace>RDAS</RootNamespace>
+		<RestoreAdditionalProjectSources>
+			https://nuget.windows10ce.com/nuget/v3/index.json
+		</RestoreAdditionalProjectSources>
+	</PropertyGroup>
+	
+	<PropertyGroup  Condition="'$(Configuration)' == 'Debug'">
+		<OutDir>/home/xaidee/.local/share/com.kesomannen.gale/riskofrain2/profiles/ElusiveVisionsDev/BepInEx/plugins/Xaidee-RecyclerDarkAlchemySwitcheroo</OutDir>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<MonoDetourHookGenStripUnusedHooks>true</MonoDetourHookGenStripUnusedHooks>
+	</PropertyGroup>
+
+	<!-- Hard Dependencies (Required) -->
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Analyzers" Version="1.0.*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.*">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	
+		<PackageReference Include="MMHOOK.RoR2" Version="2026.*"/>
+
+		<PackageReference Include="RiskOfRain2.GameLibs" Version="1.5.0-r.*"/>
+			
+		<PackageReference Include="RoR2BepInExPack" Version="1.50.*"/>
+	</ItemGroup>
+	
+	<PropertyGroup>
+		<LocalRoR2Dll>../libraries/RoR2.dll</LocalRoR2Dll>
+	</PropertyGroup>
+	<Target Name="MyRoR2DllNowwww" BeforeTargets="ResolveAssemblyReferences">
+		<ItemGroup>
+			<Reference Remove="@(Reference)" Condition="'%(Filename)' == 'RoR2'"/>
+			
+			<Reference Include="RoR2" Publicize="true">
+				<Private>false</Private>
+				<IncludeAssets>compile</IncludeAssets>
+				<HintPath>$(LocalRoR2Dll)</HintPath>
+			</Reference>
+		</ItemGroup>
+	</Target>
+</Project>
