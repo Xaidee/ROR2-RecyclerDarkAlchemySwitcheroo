@@ -332,6 +332,7 @@ ASALocalRun/
 RoR2.dll
 *-nstrip.dll
 .env
+build/*
 unity/AssetBundles
 unity/Library
 unity/Logs

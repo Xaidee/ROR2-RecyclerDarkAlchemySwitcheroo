@@ -1,9 +1,0 @@
-{
-  "strings": {
-    "EQUIPMENT_RDAS_RECYCLER_PICKUP": "Recycle items.",
-    "EQUIPMENT_RDAS_RECYCLER_DESC": "<style=cIsUtility>Recycles</style> a targeted Item into two Items of a <style=cIsUtility>lesser tier</style>.",
-
-    "CURSEDBOOK_SPELL_RDAS_DARKALCHEMY_PICKUP": "Equivalent exchange.",
-    "CURSEDBOOK_SPELL_RDAS_DARKALCHEMY_DESC": "<style=cIsUtility>Transmute</style> an Item or Equipment into a different one. <style=cStack>Can only be converted into the same tier one time.</style>"
-  }
-}
