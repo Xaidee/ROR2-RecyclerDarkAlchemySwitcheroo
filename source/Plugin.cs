@@ -109,9 +109,10 @@ public class ModPlugin : BaseUnityPlugin
         self.subcooldownTimer = 0.2F;
         pickupController.pickup = result;
         EffectManager.SimpleEffect(OmniRecycleEffectPrefab, pickupController.pickupDisplay.transform.position, Quaternion.identity, true);
+        pickupController.NetworkRecycled = true;
         pickupController.ForcePickupDisplayUpdate();
         var createPickupInfo = new GenericPickupController.CreatePickupInfo
-            { pickup = result, position = pickupController.transform.position };
+            { pickup = result, position = pickupController.transform.position, recycled = true };
         GenericPickupController.CreatePickup(in createPickupInfo);
         self.InvalidateCurrentTarget();
         return true;
@@ -132,8 +133,8 @@ public class ModPlugin : BaseUnityPlugin
         }
         
         self.currentTarget = new CursedBookBodyBehavior.PickupTargetInfo(self.FindPickupController(self.body.inputBank.GetAimRay(), 10F, 30F, true, true));
-        
-        var canTransmute = self.currentTarget.pickupController && self.currentTarget.pickupDef != null && !self.currentTarget.pickupController.Recycled;
+
+        var canTransmute = self.currentTarget.pickupController && self.currentTarget.pickupDef != null;
         self.indicator.visualizerPrefab = canTransmute ? CursedBookBodyBehavior.upgradeItemIndicatorPrefab : CursedBookBodyBehavior.upgradeItemCannotUpgradeIndicatorPrefab;
         
         self.indicator.active = true;
@@ -159,14 +160,13 @@ public class ModPlugin : BaseUnityPlugin
         if (self.isAuthority) self.targetObject = self.bodyBehavior.currentTarget.rootObject;
         var overrideConsumeOnExit = false;
         if (self.targetObject && self.targetObject.TryGetComponent(out GenericPickupController pickupController) &&
-            !pickupController.Recycled)
+            !pickupController.Recycled && NetworkServer.active)
         {
-            if (NetworkServer.active)
-            {
-                var initialPickupState = pickupController.pickup;
-                var array =
-                    (PickupTransmutationManager.GetAvailableGroupFromPickupIndex(pickupController.pickup
-                        .pickupIndex) ?? []).Where(pickupIndex => pickupIndex != initialPickupState.pickupIndex)
+            var initialPickupState = pickupController.pickup;
+            var array =
+                (PickupTransmutationManager
+                    .GetAvailableGroupFromPickupIndex(pickupController.pickup.pickupIndex) ?? [])
+                .Where(pickupIndex => pickupIndex != initialPickupState.pickupIndex)
                     .ToArray();
                 if (array.Length != 0)
                 {
@@ -174,11 +174,9 @@ public class ModPlugin : BaseUnityPlugin
                         pickupController.pickup.WithPickupIndex(Run.instance.treasureRng.NextElementUniform(array));
                     EffectManager.SimpleEffect(UpgradeItem.transmutationEffectPrefab,
                         pickupController.pickupDisplay.transform.position, Quaternion.identity, true);
-                }
+                    overrideConsumeOnExit = true;
+                    pickupController.ForcePickupDisplayUpdate();
             }
-            overrideConsumeOnExit = true;
-            pickupController.NetworkRecycled = true;
-            pickupController.ForcePickupDisplayUpdate();
         }
         if (overrideConsumeOnExit) self.bodyBehavior.InvalidateCurrentTarget();
         self.overrideConsumeOnExit = overrideConsumeOnExit;
@@ -193,7 +191,7 @@ public class ModPlugin : BaseUnityPlugin
     private static bool CanRecyclePickup(GenericPickupController genericPickup)
     {
         var pickupDef = PickupCatalog.GetPickupDef(genericPickup.pickup.pickupIndex);
-        if (pickupDef == null || pickupDef.itemIndex == ItemIndex.None || genericPickup.pickup.isRental) return false;
+        if (pickupDef == null || pickupDef.itemIndex == ItemIndex.None) return false;
         
         if (!_enableRecyclingHexes.Value && pickupDef.itemTier == ItemTier.Hex) return false;
         
