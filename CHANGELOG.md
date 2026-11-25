@@ -6,6 +6,6 @@
  - Quality compatibility:
    + Quality Recyclers keep the quality of an item in its recycled output, limited by the Recycler's own quality.
    + Dark Alchemy's description clarifies the quality will also be kept (No actual changes to the item's mechanics).
-
+ - Remove GreenShell from the game.
 # 1.0.0
  - Initial release.
