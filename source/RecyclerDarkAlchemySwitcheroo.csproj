@@ -38,6 +38,11 @@
 		<PackageReference Include="RoR2BepInExPack" Version="1.50.*"/>
 	</ItemGroup>
 	
+	<!-- Soft Dependencies (Optional) -->
+	<ItemGroup>
+		<PackageReference Include="Goorakh-Quality" Version="0.8.*"  Publicize="true"/>
+	</ItemGroup>
+	
 	<PropertyGroup>
 		<LocalRoR2Dll>../libraries/RoR2.dll</LocalRoR2Dll>
 	</PropertyGroup>

@@ -1,9 +1,25 @@
 {
   "strings": {
     "EQUIPMENT_RDAS_RECYCLER_PICKUP": "Recycle items.",
-    "EQUIPMENT_RDAS_RECYCLER_DESC": "<style=cIsUtility>Recycles</style> a targeted Item into two Items of a <style=cIsUtility>lesser tier</style>.",
+    "EQUIPMENT_RDAS_RECYCLER_DESC": "<style=cIsUtility>Recycles</style> a targeted Item into two Items of a <style=cIsUtility>lesser tier</style>. <style=cStack>Recycled items can't be recycled again.</style>",
 
     "CURSEDBOOK_SPELL_RDAS_DARKALCHEMY_PICKUP": "Equivalent exchange.",
-    "CURSEDBOOK_SPELL_RDAS_DARKALCHEMY_DESC": "<style=cIsUtility>Transmute</style> an Item or Equipment into a different one. <style=cStack>Can only be converted into the same tier one time.</style>"
+    "CURSEDBOOK_SPELL_RDAS_DARKALCHEMY_DESC": "<style=cIsUtility>Transmute</style> an Item or Equipment into a different one of the <style=cIsUtility>same tier</style>.",
+
+    
+    
+    "EQUIPMENT_RDAS_RECYCLER_UNCOMMON_PICKUP": "{0}\n<sprite name=\"Quality\"> Recycled items can be quality.",
+    "EQUIPMENT_RDAS_RECYCLER_UNCOMMON_DESC": "{0}\nRecycled items can be <sprite name=\"Quality\"> quality. All items above uncommon <sprite name=\"QualityUncommon\"> quality are recycled into uncommon <sprite name=\"QualityUncommon\"> quality.",
+
+    "EQUIPMENT_RDAS_RECYCLER_RARE_PICKUP": "{0}\n<sprite name=\"Quality\"> Recycled items can be quality.",
+    "EQUIPMENT_RDAS_RECYCLER_RARE_DESC": "{0}\nRecycled items can be <sprite name=\"Quality\"> quality. All items above rare <sprite name=\"QualityRare\"> quality are recycled into rare <sprite name=\"QualityRare\"> quality.",
+
+    "EQUIPMENT_RDAS_RECYCLER_EPIC_PICKUP": "{0}\n<sprite name=\"Quality\"> Recycled items can be quality.",
+    "EQUIPMENT_RDAS_RECYCLER_EPIC_DESC": "{0}\nRecycled items can be <sprite name=\"Quality\"> quality. All items above epic <sprite name=\"QualityEpic\"> quality are recycled into epic <sprite name=\"QualityEpic\"> quality.",
+
+    "EQUIPMENT_RDAS_RECYCLER_LEGENDARY_PICKUP": "{0}\n<sprite name=\"Quality\"> Recycled items can be quality.",
+    "EQUIPMENT_RDAS_RECYCLER_LEGENDARY_DESC": "{0}\nRecycled items can keep their <sprite name=\"Quality\"> quality.",
+    
+    "CURSEDBOOK_SPELL_RDAS_DARKALCHEMY_DESC_QUALITY": "<style=cIsUtility>Transmute</style> an Item or Equipment into a different one of the <style=cIsUtility>same tier and <sprite name=\"Quality\"> quality</style>."
   }
 }

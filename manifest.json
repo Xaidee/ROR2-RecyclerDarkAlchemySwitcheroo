@@ -1,9 +1,10 @@
 {
   "name": "GreenShell",
-  "version_number": "1.0.0",
+  "version_number": "1.1.0",
   "website_url": "https://github.com/Xaidee/ROR2-RecyclerDarkAlchemySwitcheroo",
   "description": "Swaps Recycler and Dark Alchemy's functionality with each other.",
   "dependencies": [
-    "bbepis-BepInExPack-5.4.2122"
+    "bbepis-BepInExPack-5.4.2122",
+    "RiskOfThunder-HookGenPatcher-1.2.9"
   ]
 }
